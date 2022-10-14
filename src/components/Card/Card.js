@@ -4,9 +4,9 @@ import './Card.css'
 const Card = ({title, rating, posterImage, id, updateView}) => {
     return (
         <div className = 'card'>
-            <img className = 'mini-poster' src= {posterImage} onClick = {() => updateView(id)}/>
+            <img className = 'mini-poster' alt='movie poster' src= {posterImage} onClick = {() => updateView(id)}/>
             <p>{ title }</p>
-            <p>{ rating }</p>
+            <p>Rating: { rating }</p>
         </div>
     )
 }

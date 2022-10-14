@@ -6,7 +6,7 @@ const Movies = ( {movies, updateView} ) => {
     const movieCards = movies.map(movie => {
         return (
             <Card
-            logo = {logo} 
+            //logo = {logo} 
             title= {movie.title}
             posterImage = {movie.poster_path}
             rating = {movie.average_rating.toFixed(1)}
