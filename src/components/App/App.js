@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import movieData from './movieData';
 import SingleMovie from '../SingleMovie/SingleMovie';
 import Movies from '../Movies/Movies';
 import './App.css';
@@ -10,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = { 
-      movies: movieData.movies,
+      movies: null,
       viewMode: "All", 
       singleMovie: singleMovie.movie,
       error: null,
@@ -24,6 +23,23 @@ class App extends Component {
       viewMode: "SingleMovie"
     })
   }
+
+  componentDidMount = () =>  {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
+    .then(response => {
+      console.log(response)
+      if(!response.ok) {
+        console.log(response)
+        throw new Error (response.status + ":" + response.statusText)
+      } else {
+        console.log(response)
+        return response.json()
+      }
+    })
+    .then(data => this.setState({movies: data.movies}))
+    .catch(error => this.setState({error: error}))
+  }
+
 
   render() {
     return (
