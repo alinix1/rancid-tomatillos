@@ -2,13 +2,17 @@ import React from 'react';
 import Card from '../Card/Card';
 import './Movies.css'
 
-const Movies = () => {
+const Movies = ( {movies, updateView} ) => {
     const movieCards = movies.map(movie => {
         return (
-            <Card 
+            <Card
+            logo = {logo} 
             title= {movie.title}
-            poster_path = {movie.poster_path}
-            average_rating = {movie.average_rating}
+            posterImage = {movie.poster_path}
+            rating = {movie.average_rating.toFixed(1)}
+            id={movie.id}
+            key= {movie.key}
+            updateView = {updateView}
             />
         )
     })
