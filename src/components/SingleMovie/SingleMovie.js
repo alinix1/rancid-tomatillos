@@ -1,25 +1,20 @@
-import React from 'react'
+import React from "react";
+import './SingleMovie.css'
 
-const SingleMovie = ({ movie, returnHomePage}) => {
+const SingleMovie = ({ movie, trailer, displayHome}) => {
     return (
-        <div className='single-movie-container'>
+        <section className='single-movie-container'>
+           <section className ='movie-detail-wrapper'>
             <img className='single-mini-poster' alt='single-mini-poster' src={ movie.backdrop_path }/>
             <p>{ movie.title }</p>
-            <p>{ movie.overview}</p>
-            <p>{ movie.release_date}</p>
-            <p>{ movie.runtime }</p>
-            <button onClick={() => returnHomePage()}>home</button>
-        </div>
+            <p>Overview: { movie.overview}</p>
+            <p>Release Date: { movie.release_date}</p>
+            <p>Runtime(min): { movie.runtime }</p>
+            <button onClick={() => displayHome()}>Home</button>
+            </section>  
+        </section>
     )
 
-// componentDidMount = (id) => {
-//    getAllData('/movies/${id}').then(data => {
-//       this.setState({movie: data[0].movies})
-//     })
-//   }
-
-// }
 }
 
 export default SingleMovie;
-
