@@ -5,10 +5,10 @@ const SingleMovie = ({ movie, trailers, displayHome}) => {
     return (
         <section className='single-movie-container'>
            <section className ='movie-detail-wrapper'>
-            <h2>{ movie.title }</h2>
+            <h2 style={{color: 'white'}>{ movie.title }</h2>
             <img className='single-movie-poster' alt='movie poster' src={ movie.poster_path }/>
             <p>Overview: { movie.overview}</p>
-            <p>Release Date: { movie.release_date}</p>
+            <p style={{color: 'white'}>Release Date: { movie.release_date}</p>
             <p>Runtime(min): { movie.runtime }</p>
             <button onClick={() => displayHome()}>Home</button>
             </section>  
