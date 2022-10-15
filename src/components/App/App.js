@@ -32,7 +32,7 @@ class App extends Component {
   render() {
     return (
       <main className = 'App'>
-        <h1>Rancid Tomatillos</h1>
+        <h1 className = 'main-title'>RANCID TOMATILLOS</h1>
         {this.state.viewMode === "All" && <Movies movies = {this.state.movies}
         showSingleMovie={this.showSingleMovie} />} 
         {this.state.viewMode === "SingleMovie" && <SingleMovie movie = {this.state.singleMovie} 
