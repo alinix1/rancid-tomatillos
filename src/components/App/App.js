@@ -11,6 +11,7 @@ class App extends Component {
       movies: [],
       isClicked: false,
       movie: [],
+      trailers: [],
       error: null,
     }
   }
@@ -22,9 +23,11 @@ class App extends Component {
   }
 
   handleClick = (event) => {
-    console.log(event)
     getAllData(`/movies/${event.currentTarget.id}`).then(data => {
-      this.setState({isClicked: true, movie: data[0].movie})
+      this.setState({isClicked: true, movie: data[0].movie}) 
+    })
+    getAllData(`/movies/${event.currentTarget.id}/videos`).then(data => {
+      this.setState({trailers: data[0].videos})
     })
   }
 

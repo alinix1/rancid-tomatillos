@@ -1,12 +1,12 @@
 import React from "react";
 import './SingleMovie.css'
 
-const SingleMovie = ({ movie, trailer, displayHome}) => {
+const SingleMovie = ({ movie, trailers, displayHome}) => {
     return (
         <section className='single-movie-container'>
            <section className ='movie-detail-wrapper'>
-            <img className='single-mini-poster' alt='single-mini-poster' src={ movie.backdrop_path }/>
-            <p>{ movie.title }</p>
+            <h2>{ movie.title }</h2>
+            <img className='single-movie-poster' alt='movie poster' src={ movie.poster_path }/>
             <p>Overview: { movie.overview}</p>
             <p>Release Date: { movie.release_date}</p>
             <p>Runtime(min): { movie.runtime }</p>
@@ -14,6 +14,8 @@ const SingleMovie = ({ movie, trailer, displayHome}) => {
             </section>  
         </section>
     )
+
+     //will add in input above for trailers
 
 }
 
