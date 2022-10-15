@@ -1,16 +1,22 @@
-import React from 'react'
+import React from "react";
+import './SingleMovie.css'
 
-const SingleMovie = ({ movie, returnHomePage, id }) => {
+const SingleMovie = ({ movie, trailers, displayHome}) => {
     return (
-        <div className='single-movie-container'>
-            <img className='single-mini-poster' alt='single-mini-poster' src={ movie.backdrop_path } style={{height: 300}}/>
-            <p style={{color: 'white'}}>{ movie.title }</p>
-            <p>{ movie.overview}</p>
-            <p style={{color: 'white'}}>{ movie.release_date}</p>
-            <p>{ movie.runtime }</p>
-            <button onClick={() => returnHomePage()}>home</button>
-        </div>
+        <section className='single-movie-container'>
+           <section className ='movie-detail-wrapper'>
+            <h2 style={{color: 'white'}>{ movie.title }</h2>
+            <img className='single-movie-poster' alt='movie poster' src={ movie.poster_path }/>
+            <p>Overview: { movie.overview}</p>
+            <p style={{color: 'white'}>Release Date: { movie.release_date}</p>
+            <p>Runtime(min): { movie.runtime }</p>
+            <button onClick={() => displayHome()}>Home</button>
+            </section>  
+        </section>
     )
+
+     //will add in input above for trailers
+
 }
 
-export default SingleMovie
+export default SingleMovie;
