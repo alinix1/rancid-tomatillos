@@ -1,5 +1,8 @@
-// import './SingleMovie.css';
-// import React from 'react';
+
+
+
+
+
 
 
 
@@ -9,14 +12,9 @@
 
 
 // componentDidMount = (id) => {
-//     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}')
-//     .then(response => {
-//       if(!response.ok) {
-//         throw new Error (response.status + ":" + response.statusText)
-//       } else {
-//         return response.json()
-//       }
+//    getAllData('/movies/${id}').then(data => {
+//       this.setState({movie: data[0].movies})
 //     })
-//     .then(data => this.setState({movies: data.movies}))
-//     .catch(error => this.setState({error: error}))
 //   }
+
+// }

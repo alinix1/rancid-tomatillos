@@ -10,7 +10,7 @@ const fetchAllData = (path) => {
         .catch(error => console.log(error))    
 }
 
-const getAllData= (data) => {
+const getAllData = (data) => {
     const result = Promise.all([fetchAllData(data)])
     .then(responses => {
         return responses
