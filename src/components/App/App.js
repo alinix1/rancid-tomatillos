@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { getAllData } from '../../apiCalls';
 import SingleMovie from '../SingleMovie/SingleMovie';
 import Movies from '../Movies/Movies';
 import './App.css';
@@ -16,7 +17,7 @@ class App extends Component {
     }
   }
 
-  updateView = (id)  => {
+  updateView = (id) => {
     console.log(id)
     this.setState({
       ...this.state,
@@ -24,17 +25,10 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-    .then(response => {
-      if(!response.ok) {
-        throw new Error (response.status + ":" + response.statusText)
-      } else {
-        return response.json()
-      }
+  componentDidMount = () => {
+    getAllData('/movies').then(data => {
+      this.setState({movies: data[0].movies})
     })
-    .then(data => this.setState({movies: data.movies}))
-    .catch(error => this.setState({error: error}))
   }
 
   render() {
