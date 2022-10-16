@@ -1,8 +1,29 @@
-.single-movie-container{
+* {
+    z-index: 2;
+}
+
+.single-movie-container {
     display: flex;
     align-items: flex-start;
+}
 
-.single-movie-poster {
+.single-movie-backdrop {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+}
+
+.movie-detail-wrapper {
+    background-color: rgb(0,0,0,0.5);
+    width: 60%;
+}
+
+.movie-poster {
     height: 200px;
     width: 150px;
+}
+
+p, h2 {
+    color: white;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Card/Card';
 import './Movies.css'
 
-const Movies = ( {movies, handleClick} ) => {
+const Movies = ( {movies, showSingleMovie} ) => {
     const movieCards = movies.map(movie => {
         return (
             <Card
@@ -11,7 +11,7 @@ const Movies = ( {movies, handleClick} ) => {
             rating = {Math.round(movie.average_rating)}
             id = {movie.id}
             key = {movie.id}
-            handleClick = {handleClick}
+            showSingleMovie = {showSingleMovie}
             />
         )
     })
