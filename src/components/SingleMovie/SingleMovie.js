@@ -19,28 +19,32 @@ class SingleMovie extends Component {
   componentDidMount = () => {
     fetchAllData(`/movies/${this.props.selectedMovie.id}`)
     .then(data => this.setState({movie: data.movie}))
+    .catch((error) => this.setState({ errorMessage: 'Something went wrong'}))
+
     fetchAllData(`/movies/${this.props.selectedMovie.id}/videos`)
-    .then((data) => this.setState({ trailers: data}))
+    .then((data) => this.setState({ trailers: data.videos}))
+    // .then(data => console.log(data.videos))
     .catch((error) => this.setState({ errorMessage: 'Something went wrong'}))
-    fetchAllData(`/movies/${this.props.selectedMovie.id}`)
-    .then(data => this.setState({ movie: data[0].movie }))
-    .catch((error) => this.setState({ errorMessage: 'Something went wrong'}))
+
+    // fetchAllData(`/movies/${this.props.selectedMovie.id}`)
+    // .then(data => this.setState({ movie: data[0].movie }))
+    // .catch((error) => this.setState({ errorMessage: 'Something went wrong'}))
   };
 
-//   createTrailerSlides = () => {
-//     let trailerMovies = this.state.trailers.map((video) => {
-//       return (
-//         <SwiperSlide className="swiper-slide" key={video.id}>
-//           <ReactPlayer
-//             controls={true}
-//             className="video"
-//             url={`https://www.youtube.com/watch/${video.key}`}
-//           />
-//         </SwiperSlide>
-//       );
-//     });
-//     return trailerMovies;
-//   };
+  createTrailerSlides = () => {
+    let trailerMovies = this.state.trailers.map((video) => {
+      return (
+        <SwiperSlide className="swiper-slide" key={video.id}>
+          <ReactPlayer
+            controls={true}
+            className="video"
+            url={`https://www.youtube.com/watch/${video.key}`}
+          />
+        </SwiperSlide>
+      );
+    });
+    return trailerMovies;
+  };
 
   render() {
     return (
@@ -65,9 +69,9 @@ class SingleMovie extends Component {
             <p>Runtime: {this.state.movie.runtime} minutes</p>
           </section>
           <section className="movie-trailer">
-            {/* <Swiper modules={[Navigation, Mousewheel, Keyboard]} slidesPerView = {1} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
+            <Swiper modules={[Navigation, Mousewheel, Keyboard]} slidesPerView = {1} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
                 {this.createTrailerSlides()}
-            </Swiper> */}
+            </Swiper>
           </section>
         </section>
       </section>
