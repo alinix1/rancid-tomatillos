@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import loading from '../../assets/refresh.png';
 import { fetchAllData } from '../../apiCalls';
 import SingleMovie from '../SingleMovie/SingleMovie';
 import Movies from '../Movies/Movies';
@@ -18,7 +19,7 @@ class App extends Component {
   componentDidMount() {
     fetchAllData('/movies')
     .then(data => this.setState({movies: data.movies}))
-    .catch(error => this.setState({errorMessage: 'Something went wrong'}))
+    .catch(error => this.setState({errorMessage: 'Something went wrong, please try again!'}))
   }
 
   showSingleMovie = (event) => {
@@ -35,10 +36,10 @@ class App extends Component {
   render() {
     return (
       <main className = 'App'>
-        <h1 className ='main-title'>Rancid Tomatillos</h1>
+        <h1 className ='main-title'>🍿 Rancid Tomatillos 🎬</h1>
         {this.state.homeButton ? <SingleMovie selectedMovie = {this.state.selectedMovie} returnHome = {this.returnHome}/> : <Movies movies = {this.state.movies} showSingleMovie = {this.showSingleMovie}/>}
-        {!this.state.error && <h2>{this.state.error}</h2>}
-        {!this.state.error && !this.state.movies.length && <h2>Loading...</h2>}
+        {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
+        {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image' /><h2>Loading...</h2></div>}
       </main>
     )
   }

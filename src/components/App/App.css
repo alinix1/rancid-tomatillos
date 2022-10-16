@@ -27,3 +27,8 @@ html {
       0px 0px 20px #FFCA0Eff;
   padding-left: 20px;
 }
+
+.loading-image {
+  height: 100px;
+  width: 100px;
+}
