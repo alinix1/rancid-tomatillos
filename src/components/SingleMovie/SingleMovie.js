@@ -4,13 +4,15 @@ import './SingleMovie.css'
 const SingleMovie = ({ movie, trailers, displayHome}) => {
     return (
         <section className='single-movie-container'>
+           <img className = 'single-movie-backdrop' src = {movie.backdrop_path} alt= 'movie backdrop'/> 
            <section className ='movie-detail-wrapper'>
-            <h2 style={{color: 'white'}>{ movie.title }</h2>
-            <img className='single-movie-poster' alt='movie poster' src={ movie.poster_path }/>
+           <button onClick={() => displayHome()}>❌</button>
+            <h2>{ movie.title }</h2>
+            <img className='movie-poster' src={ movie.poster_path } alt='movie poster'/>
             <p>Overview: { movie.overview}</p>
-            <p style={{color: 'white'}>Release Date: { movie.release_date}</p>
-            <p>Runtime(min): { movie.runtime }</p>
-            <button onClick={() => displayHome()}>Home</button>
+            <p>Release Date: { movie.release_date}</p>
+            <p>Genres: { movie.genres} </p>
+            <p>Runtime: { movie.runtime } minutes</p>
             </section>  
         </section>
     )

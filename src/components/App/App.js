@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <main className = 'App'>
-        <h1>Rancid Tomatillos</h1>
+        <h1 className ='main-title'>Rancid Tomatillos</h1>
         {!this.state.isClicked && <Movies movies = {this.state.movies} handleClick = {this.handleClick}/>} 
         {this.state.isClicked && <SingleMovie movie = {this.state.movie} displayHome = {this.displayHome}/>}
         {this.state.error && <h2>{this.state.error}</h2>}
