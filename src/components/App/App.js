@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { getAllData } from '../../apiCalls';
+import { fetchAllData } from '../../apiCalls';
 import SingleMovie from '../SingleMovie/SingleMovie';
 import Movies from '../Movies/Movies';
 import './App.css';
@@ -9,39 +9,36 @@ class App extends Component {
     super();
     this.state = { 
       movies: [],
-      isClicked: false,
-      movie: [],
-      trailers: [],
-      error: null,
+      selectedMovie: [],
+      errorMessage: '',
+      homeButton: false
     }
   }
 
-  componentDidMount = () => {
-    getAllData('/movies').then(data => {
-      this.setState({movies: data[0].movies})
-    })
+  componentDidMount() {
+    fetchAllData('/movies')
+    .then(data => this.setState({movies: data.movies}))
+    .catch(error => this.setState({errorMessage: 'Something went wrong'}))
   }
 
-  handleClick = (event) => {
-    getAllData(`/movies/${event.currentTarget.id}`).then(data => {
-      this.setState({isClicked: true, movie: data[0].movie}) 
-    })
-    getAllData(`/movies/${event.currentTarget.id}/videos`).then(data => {
-      this.setState({trailers: data[0].videos})
-    })
+  showSingleMovie = (event) => {
+    console.log(event.currentTarget.id)
+    let selectedMovie = `/movies/${parseInt(event.currentTarget.id)}`
+    fetchAllData(selectedMovie)
+    .then(data => this.setState({selectedMovie: data.movie, homeButton: true}))
   }
 
-  displayHome = () => {
-    this.setState({isClicked: false})
+  returnHome = () => {
+    this.setState({homeButton: false})
   }
 
   render() {
     return (
       <main className = 'App'>
         <h1 className ='main-title'>Rancid Tomatillos</h1>
-        {!this.state.isClicked && <Movies movies = {this.state.movies} handleClick = {this.handleClick}/>} 
-        {this.state.isClicked && <SingleMovie movie = {this.state.movie} displayHome = {this.displayHome}/>}
-        {this.state.error && <h2>{this.state.error}</h2>}
+        {this.state.homeButton ? <SingleMovie selectedMovie = {this.state.selectedMovie} returnHome = {this.returnHome}/> : <Movies movies = {this.state.movies} showSingleMovie = {this.showSingleMovie}/>}
+        {!this.state.error && <h2>{this.state.error}</h2>}
+        {!this.state.error && !this.state.movies.length && <h2>Loading...</h2>}
       </main>
     )
   }
