@@ -19,16 +19,11 @@ class SingleMovie extends Component {
   componentDidMount = () => {
     fetchAllData(`/movies/${this.props.selectedMovie.id}`)
     .then(data => this.setState({movie: data.movie}))
-    .catch((error) => this.setState({ errorMessage: 'Something went wrong'}))
+    .catch((error) => this.setState({ errorMessage: 'Something went wrong, please try again!'}))
 
     fetchAllData(`/movies/${this.props.selectedMovie.id}/videos`)
     .then((data) => this.setState({ trailers: data.videos}))
-    // .then(data => console.log(data.videos))
-    .catch((error) => this.setState({ errorMessage: 'Something went wrong'}))
-
-    // fetchAllData(`/movies/${this.props.selectedMovie.id}`)
-    // .then(data => this.setState({ movie: data[0].movie }))
-    // .catch((error) => this.setState({ errorMessage: 'Something went wrong'}))
+    .catch((error) => this.setState({ errorMessage: 'Something went wrong, please try again!'}))
   };
 
   createTrailerSlides = () => {
@@ -74,6 +69,7 @@ class SingleMovie extends Component {
             </Swiper>
           </section>
         </section>
+        {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
       </section>
     );
   }

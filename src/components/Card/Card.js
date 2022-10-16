@@ -1,6 +1,6 @@
 import React from 'react'
 import './Card.css'
-import tomatillo from '../../tomatillo.png';
+import tomatillo from '../../assets/tomatillo.png';
 
 const Card = ({title, rating, poster, id, showSingleMovie}) => {
     return (
