@@ -39,7 +39,7 @@ class App extends Component {
         <h1 className ='main-title'>Rancid Tomatillos</h1>
         {this.state.homeButton ? <SingleMovie selectedMovie = {this.state.selectedMovie} returnHome = {this.returnHome}/> : <Movies movies = {this.state.movies} showSingleMovie = {this.showSingleMovie}/>}
         {this.state.error && <h2>{this.state.error}</h2>}
-        {!this.state.error && !this.state.movies.length && <div><img src = {loading} alt='loading image' className='loading-image' /><h2>Loading...</h2></div>}
+        {!this.state.error && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image' /><h2>Loading...</h2></div>}
       </main>
     )
   }
