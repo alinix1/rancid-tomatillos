@@ -4,6 +4,9 @@ import { fetchAllData } from '../../apiCalls';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel, Keyboard } from "swiper";
 import "swiper/css";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import "./SingleMovie.css";
 
 class SingleMovie extends Component {
