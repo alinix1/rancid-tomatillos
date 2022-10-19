@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
+import { NavLink } from 'react-router-dom';
 import { fetchAllData } from '../../apiCalls';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel, Keyboard } from "swiper";
@@ -20,7 +21,6 @@ class SingleMovie extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props)
     fetchAllData(`/movies/${this.props.selectedMovie.id}`)
     .then(data => this.setState({movie: data.movie}))
     .catch((error) => this.setState({ errorMessage: 'Something went wrong, please try again!'}))
@@ -54,8 +54,8 @@ class SingleMovie extends Component {
           alt="movie backdrop"
         />
         <section className="movie-detail-wrapper">
+          <NavLink to = {'/'} >❌</NavLink>
           <section className="movie-details">
-            <button onClick={() => this.props.returnHome()}>❌</button>
             <h2>{this.state.movie.title}</h2>
             <img
               className="movie-poster"
