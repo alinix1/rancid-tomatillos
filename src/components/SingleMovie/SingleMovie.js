@@ -20,6 +20,7 @@ class SingleMovie extends Component {
   }
 
   componentDidMount = () => {
+    console.log(this.props)
     fetchAllData(`/movies/${this.props.selectedMovie.id}`)
     .then(data => this.setState({movie: data.movie}))
     .catch((error) => this.setState({ errorMessage: 'Something went wrong, please try again!'}))

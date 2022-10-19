@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import loading from '../../assets/refresh.png';
 import { fetchAllData } from '../../apiCalls';
 import SingleMovie from '../SingleMovie/SingleMovie';
@@ -28,13 +28,14 @@ class App extends Component {
           <h1 className ='main-title'>🍿 Rancid Tomatillos 🎬</h1>
         </nav>
         <Switch>
-          <Route exact path ='/' render = {() => <Movies movies = {this.state.movies}/>}/>
-          <Route exact path = '/:movieId' render = {({match}) => {
+          <Route path = '/:id' render = {({match}) => {
+                        console.log(match)
           const selectedMovie = this.state.movies.find(movie => movie.id === parseInt(match.params.id))
           return <SingleMovie selectedMovie = {selectedMovie}/>
           }}/> 
-        {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
-        {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image' /><h2>Loading...</h2></div>}
+          <Route path ='/' render = {() => <Movies movies = {this.state.movies}/>}/>
+          {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
+          {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image' /><h2>Loading...</h2></div>}
         </Switch>
       </main>
     )
