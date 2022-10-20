@@ -1,13 +1,11 @@
 describe("Main Movie Page", () => {
   
   beforeEach(() => {
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies')
     cy.visit('http://localhost:3000')
   })
 
   it('A user should be able to visit http://localhost:3000 and see the application title', () => {
     cy.get('h1').contains('🍿 Rancid Tomatillos 🎬').should('be.visible')
-    .should('have.length', 1)
   })
 
   it('A user should be able to visit http://localhost:3000 and view a collection of movies', () => {
