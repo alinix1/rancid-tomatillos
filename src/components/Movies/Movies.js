@@ -3,7 +3,10 @@ import Card from '../Card/Card';
 import './Movies.css'
 
 const Movies = ( {movies} ) => {
-    const movieCards = movies.map(movie => {
+    const sortedMovies = movies.sort((a, b) => {
+        return a.title.localeCompare(b.title)
+    })
+    const movieCards = sortedMovies.map(movie => {
         return (
             <Card
             title = {movie.title}

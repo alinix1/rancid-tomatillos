@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchAllData } from '../../apiCalls';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Mousewheel, Keyboard } from "swiper";
+import { Navigation, Mousewheel, Keyboard, Pagination } from "swiper";
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -54,23 +54,20 @@ class SingleMovie extends Component {
           alt="movie backdrop"
         />
         <section className="movie-detail-wrapper">
-          <NavLink to = {'/'} >❌</NavLink>
-          <section className="movie-details">
-            <h2>{this.state.movie.title}</h2>
-            <img
-              className="movie-poster"
-              src={this.state.movie.poster_path}
-              alt="movie poster"
-            />
-            <p>Overview: {this.state.movie.overview}</p>
-            <p>Release Date: {this.state.movie.release_date}</p>
-            <p>Genres: {this.state.movie.genres} </p>
-            <p>Runtime: {this.state.movie.runtime} minutes</p>
-          </section>
+          <div className= 'button'>
+            <Link to = '/' >❌</Link>
+          </div>
+          <h2>{this.state.movie.title}</h2>
           <section className="movie-trailer">
-            <Swiper modules={[Navigation, Mousewheel, Keyboard]} slidesPerView = {1} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
+            <Swiper modules={[Navigation, Pagination, Mousewheel, Keyboard]} slidesPerView = {1} pagination = {{clickable: true}} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
                 {this.createTrailerSlides()}
             </Swiper>
+          </section>
+          <section className="movie-details">
+            <p>Overview: {this.state.movie.overview}</p>
+            <p>Release Date: {this.state.movie.release_date}</p>
+            <p>Genres: {this.state.movie.genres}</p>
+            <p>Runtime: {this.state.movie.runtime} minutes</p>
           </section>
         </section>
         {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
