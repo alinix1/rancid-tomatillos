@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Route, Switch } from 'react-router-dom';
 import loading from '../../assets/refresh.png';
 import { fetchAllData } from '../../apiCalls';
 import SingleMovie from '../SingleMovie/SingleMovie';
@@ -10,9 +11,7 @@ class App extends Component {
     super();
     this.state = { 
       movies: [],
-      selectedMovie: [],
       errorMessage: '',
-      homeButton: false
     }
   }
 
@@ -22,24 +21,21 @@ class App extends Component {
     .catch(error => this.setState({errorMessage: 'Something went wrong, please try again!'}))
   }
 
-  showSingleMovie = (event) => {
-    console.log(event.currentTarget.id)
-    let selectedMovie = `/movies/${parseInt(event.currentTarget.id)}`
-    fetchAllData(selectedMovie)
-    .then(data => this.setState({selectedMovie: data.movie, homeButton: true}))
-  }
-
-  returnHome = () => {
-    this.setState({homeButton: false})
-  }
-
   render() {
     return (
       <main className = 'App'>
-        <h1 className ='main-title'>🍿 Rancid Tomatillos 🎬</h1>
-        {this.state.homeButton ? <SingleMovie selectedMovie = {this.state.selectedMovie} returnHome = {this.returnHome}/> : <Movies movies = {this.state.movies} showSingleMovie = {this.showSingleMovie}/>}
-        {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
-        {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image' /><h2>Loading...</h2></div>}
+        <nav>
+          <h1 className ='main-title'>🍿 Rancid Tomatillos 🎬</h1>
+        </nav>
+        <Switch>
+          <Route path = '/:id' render = {({match}) => {
+          const selectedMovie = this.state.movies.find(movie => movie.id === parseInt(match.params.id))
+          return <SingleMovie selectedMovie = {selectedMovie}/>
+          }}/> 
+          <Route path ='/' render = {() => <Movies movies = {this.state.movies}/>}/>
+          {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
+          {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>}
+        </Switch>
       </main>
     )
   }

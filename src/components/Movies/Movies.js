@@ -2,8 +2,11 @@ import React from 'react';
 import Card from '../Card/Card';
 import './Movies.css'
 
-const Movies = ( {movies, showSingleMovie} ) => {
-    const movieCards = movies.map(movie => {
+const Movies = ( {movies} ) => {
+    const sortedMovies = movies.sort((a, b) => {
+        return a.title.localeCompare(b.title)
+    })
+    const movieCards = sortedMovies.map(movie => {
         return (
             <Card
             title = {movie.title}
@@ -11,7 +14,6 @@ const Movies = ( {movies, showSingleMovie} ) => {
             rating = {Math.round(movie.average_rating)}
             id = {movie.id}
             key = {movie.id}
-            showSingleMovie = {showSingleMovie}
             />
         )
     })
