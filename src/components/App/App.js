@@ -18,7 +18,11 @@ class App extends Component {
   componentDidMount() {
     fetchAllData('/movies')
     .then(data => this.setState({movies: data.movies}))
-    .catch(error => this.setState({errorMessage: 'Something went wrong, please try again!'}))
+    .catch(error => {
+      this.setState({
+        ...this.state,
+        errorMessage: 'Something went wrong, please try again!'})
+    })
   }
 
   render() {
@@ -27,15 +31,16 @@ class App extends Component {
         <nav>
           <h1 className ='main-title'>🍿 Rancid Tomatillos 🎬</h1>
         </nav>
+        {!this.state.errorMessage &&
         <Switch>
           <Route path = '/:id' render = {({match}) => {
           const selectedMovie = this.state.movies.find(movie => movie.id === parseInt(match.params.id))
           return <SingleMovie selectedMovie = {selectedMovie}/>
           }}/> 
           <Route path ='/' render = {() => <Movies movies = {this.state.movies}/>}/>
-          {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
-          {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>}
-        </Switch>
+        </Switch>}
+        {this.state.errorMessage && <h2 className= 'error-message'>{this.state.errorMessage}</h2>}
+        {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>}
       </main>
     )
   }
