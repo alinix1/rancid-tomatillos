@@ -8,6 +8,8 @@ import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import close from '../../assets/close.png';
+import loading from '../../assets/refresh.png';
 import "./SingleMovie.css";
 
 class SingleMovie extends Component {
@@ -17,17 +19,18 @@ class SingleMovie extends Component {
       movie: '',
       trailers: [],
       errorMessage: '',
+      videoErrorMessage: ''
     };
   }
 
   componentDidMount = () => {
-    fetchAllData(`/movies/${this.props.selectedMovie.id}`)
+    fetchAllData(`/movies/${this.props.id}`)
     .then(data => this.setState({movie: data.movie}))
     .catch((error) => this.setState({errorMessage: 'Something went wrong, please try again!'}))
 
-    fetchAllData(`/movies/${this.props.selectedMovie.id}/videos`)
+    fetchAllData(`/movies/${this.props.id}/videos`)
     .then((data) => this.setState({trailers: data.videos}))
-    .catch((error) => this.setState({ ...this.state, errorMessage: 'Something went wrong, please try again!'}))
+    .catch((error) => this.setState({ ...this.state, videoErrorMessage: 'Sorry, error displaying videos.'}))
   };
 
   createTrailerSlides = () => {
@@ -45,32 +48,39 @@ class SingleMovie extends Component {
     return trailerMovies;
   };
 
+
   render() {
+    if(!this.state.movie && !this.state.errorMessage) {
+      return <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>
+    } else if (this.state.errorMessage) {
+      return <h2 className= 'error-message'>{this.state.errorMessage}</h2>
+    }
+    const {backdrop_path, title, overview, release_date, genres, runtime} = this.state.movie
     return (
       <section className="single-movie-container">
         <img
           className="single-movie-backdrop"
-          src={this.state.movie.backdrop_path}
+          src={backdrop_path}
           alt="movie backdrop"
         />
         <section className="movie-detail-wrapper">
           <div className= 'button'>
-            <Link to = '/' >❌</Link>
+            <Link to = '/' ><img src = {close} alt='close' className='close-symbol'/></Link>
           </div>
-          <h2>{this.state.movie.title}</h2>
+          <h2>{title}</h2>
           <section className="movie-trailer">
             <Swiper modules={[Navigation, Pagination, Mousewheel, Keyboard]} slidesPerView = {1} pagination = {{clickable: true}} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
                 {this.createTrailerSlides()}
+                {this.state.videoErrorMessage && <h2 className= 'error-message'>{this.state.videoErrorMessage}</h2>}
             </Swiper>
           </section>
           <section className="movie-details">
-            <p>Overview: {this.state.movie.overview}</p>
-            <p>Release Date: {this.state.movie.release_date}</p>
-            <p>Genres: {this.state.movie.genres}</p>
-            <p>Runtime: {this.state.movie.runtime} minutes</p>
+            <p>Overview: {overview}</p>
+            <p>Release Date: {release_date}</p>
+            <p>Genres: {genres.join(', ')}</p>
+            <p>Runtime: {runtime} minutes</p>
           </section>
         </section>
-        {this.state.errorMessage && <h2 className= 'error-message'>{this.state.errorMessage}</h2>}
       </section>
     );
   }
