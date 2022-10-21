@@ -1,5 +1,5 @@
 describe("Main Movie Page", () => {
-  
+
   beforeEach(() => {
     cy.visit('http://localhost:3000')
   });
@@ -30,5 +30,5 @@ describe("Main Movie Page", () => {
     cy.contains('h2', '2067')
   });
   
-  }); 
+}); 
    
