@@ -77,7 +77,7 @@ describe("Single Movie Page", () => {
       "Overview: Tessa finds herself struggling with her complicated relationship with Hardin; she faces a dilemma that could change their lives forever."
     );
     cy.contains("p", "Release Date: 2020-09-02");
-    cy.contains("p", "Genres: RomanceDrama");
+    cy.contains("p", "Genres: Romance, Drama");
     cy.contains("p", "Runtime: 105 minutes");
   });
 

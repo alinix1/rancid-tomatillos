@@ -50,10 +50,12 @@ class SingleMovie extends Component {
 
 
   render() {
-    if(!this.state.movie) {
+    if(!this.state.movie && !this.state.errorMessage) {
       return <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>
-    } 
-    const {backdrop_path, title, overview, release_date, genres, runtime, errorMessage, videoErrorMessage} = this.state.movie
+    } else if (this.state.errorMessage) {
+      return <h2 className= 'error-message'>{this.state.errorMessage}</h2>
+    }
+    const {backdrop_path, title, overview, release_date, genres, runtime} = this.state.movie
     return (
       <section className="single-movie-container">
         <img
@@ -65,12 +67,11 @@ class SingleMovie extends Component {
           <div className= 'button'>
             <Link to = '/' ><img src = {close} alt='close' className='close-symbol'/></Link>
           </div>
-          {errorMessage && <h2 className= 'error-message'>{errorMessage}</h2>}
           <h2>{title}</h2>
           <section className="movie-trailer">
             <Swiper modules={[Navigation, Pagination, Mousewheel, Keyboard]} slidesPerView = {1} pagination = {{clickable: true}} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
                 {this.createTrailerSlides()}
-                {videoErrorMessage && <h2 className= 'error-message'>{videoErrorMessage}</h2>}
+                {this.state.videoErrorMessage && <h2 className= 'error-message'>{this.state.videoErrorMessage}</h2>}
             </Swiper>
           </section>
           <section className="movie-details">
