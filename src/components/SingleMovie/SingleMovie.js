@@ -17,17 +17,18 @@ class SingleMovie extends Component {
       movie: '',
       trailers: [],
       errorMessage: '',
+      videoErrorMessage: ''
     };
   }
 
   componentDidMount = () => {
-    fetchAllData(`/movies/${this.props.selectedMovie.id}`)
+    fetchAllData(`/movies/${this.props.id}`)
     .then(data => this.setState({movie: data.movie}))
     .catch((error) => this.setState({errorMessage: 'Something went wrong, please try again!'}))
 
-    fetchAllData(`/movies/${this.props.selectedMovie.id}/videos`)
+    fetchAllData(`/movies/${this.props.id}/videos`)
     .then((data) => this.setState({trailers: data.videos}))
-    .catch((error) => this.setState({ ...this.state, errorMessage: 'Something went wrong, please try again!'}))
+    .catch((error) => this.setState({ ...this.state, videoErrorMessage: 'Sorry, error displaying videos.'}))
   };
 
   createTrailerSlides = () => {
@@ -57,10 +58,12 @@ class SingleMovie extends Component {
           <div className= 'button'>
             <Link to = '/' >❌</Link>
           </div>
+          {this.state.errorMessage && <h2 className= 'error-message'>{this.state.errorMessage}</h2>}
           <h2>{this.state.movie.title}</h2>
           <section className="movie-trailer">
             <Swiper modules={[Navigation, Pagination, Mousewheel, Keyboard]} slidesPerView = {1} pagination = {{clickable: true}} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
                 {this.createTrailerSlides()}
+                {this.state.videoErrorMessage && <h2 className= 'error-message'>{this.state.videoErrorMessage}</h2>}
             </Swiper>
           </section>
           <section className="movie-details">
@@ -70,7 +73,6 @@ class SingleMovie extends Component {
             <p>Runtime: {this.state.movie.runtime} minutes</p>
           </section>
         </section>
-        {this.state.errorMessage && <h2 className= 'error-message'>{this.state.errorMessage}</h2>}
       </section>
     );
   }
