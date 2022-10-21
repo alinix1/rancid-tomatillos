@@ -1,33 +1,43 @@
 describe("Main Movie Page", () => {
   beforeEach(() => {
-   cy.intercept('GET',"https://rancid-tomatillos.herokuapp.com/api/v2/movies", {
-      "movies": [
-        {
-          id: 528085,
-          poster_path: "https://image.tmdb.org/t/p/original//7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
-          backdrop_path: "https://image.tmdb.org/t/p/original//5UkzNSOK561c2QRy2Zr4AkADzLT.jpg",
-          title: "2067",
-          average_rating: 5,
-          release_date: "2020-10-01"
-          },
-        {
-          id: 613504,
-          poster_path: "https://image.tmdb.org/t/p/original//kiX7UYfOpYrMFSAGbI6j1pFkLzQ.jpg",
-          backdrop_path: "https://image.tmdb.org/t/p/original//r5srC0cqU36n38azFnCyReEksiR.jpg",
-          title: "After We Collided",
-          average_rating: 5.25,
-          release_date: "2020-09-02"
+    cy.intercept(
+      "GET",
+      "https://rancid-tomatillos.herokuapp.com/api/v2/movies",
+      {
+        movies: [
+          {
+            id: 528085,
+            poster_path:
+              "https://image.tmdb.org/t/p/original//7D430eqZj8y3oVkLFfsWXGRcpEG.jpg",
+            backdrop_path:
+              "https://image.tmdb.org/t/p/original//5UkzNSOK561c2QRy2Zr4AkADzLT.jpg",
+            title: "2067",
+            average_rating: 5,
+            release_date: "2020-10-01",
           },
           {
-          id: 659986,
-          poster_path: "https://image.tmdb.org/t/p/original//gzFatNrw0lhKD5NxaU6zC7S2KjP.jpg",
-          backdrop_path: "https://image.tmdb.org/t/p/original//xUUtcxWC6H48UCrpRwwSPQz69XC.jpg",
-          title: "The Owners",
-          average_rating: 4.857142857142857,
-          release_date: "2020-09-04"
-          }
-      ]
-    }) 
+            id: 613504,
+            poster_path:
+              "https://image.tmdb.org/t/p/original//kiX7UYfOpYrMFSAGbI6j1pFkLzQ.jpg",
+            backdrop_path:
+              "https://image.tmdb.org/t/p/original//r5srC0cqU36n38azFnCyReEksiR.jpg",
+            title: "After We Collided",
+            average_rating: 5.25,
+            release_date: "2020-09-02",
+          },
+          {
+            id: 659986,
+            poster_path:
+              "https://image.tmdb.org/t/p/original//gzFatNrw0lhKD5NxaU6zC7S2KjP.jpg",
+            backdrop_path:
+              "https://image.tmdb.org/t/p/original//xUUtcxWC6H48UCrpRwwSPQz69XC.jpg",
+            title: "The Owners",
+            average_rating: 4.857142857142857,
+            release_date: "2020-09-04",
+          },
+        ],
+      }
+    );
     cy.visit("http://localhost:3000/");
   });
 
@@ -48,8 +58,7 @@ describe("Main Movie Page", () => {
     cy.contains("h2", "2067");
   });
 
-  it('should not have a take me home X button', () => {
-    cy.get('.button').should('not.exist')
+  it("should not have a take me home X button", () => {
+    cy.get(".button").should("not.exist");
   });
-  
 });
