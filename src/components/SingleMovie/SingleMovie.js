@@ -23,11 +23,11 @@ class SingleMovie extends Component {
   componentDidMount = () => {
     fetchAllData(`/movies/${this.props.selectedMovie.id}`)
     .then(data => this.setState({movie: data.movie}))
-    .catch((error) => this.setState({ errorMessage: 'Something went wrong, please try again!'}))
+    .catch((error) => this.setState({errorMessage: 'Something went wrong, please try again!'}))
 
     fetchAllData(`/movies/${this.props.selectedMovie.id}/videos`)
-    .then((data) => this.setState({ trailers: data.videos}))
-    .catch((error) => this.setState({ errorMessage: 'Something went wrong, please try again!'}))
+    .then((data) => this.setState({trailers: data.videos}))
+    .catch((error) => this.setState({ ...this.state, errorMessage: 'Something went wrong, please try again!'}))
   };
 
   createTrailerSlides = () => {
@@ -70,7 +70,7 @@ class SingleMovie extends Component {
             <p>Runtime: {this.state.movie.runtime} minutes</p>
           </section>
         </section>
-        {this.state.errorMessage && <h2>{this.state.errorMessage}</h2>}
+        {this.state.errorMessage && <h2 className= 'error-message'>{this.state.errorMessage}</h2>}
       </section>
     );
   }
