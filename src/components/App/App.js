@@ -34,7 +34,6 @@ class App extends Component {
         {!this.state.errorMessage &&
         <Switch>
           <Route path = '/:id' render = {({match}) => {
-          //const selectedMovie = this.state.movies.find(movie => movie.id === parseInt(match.params.id))
           return <SingleMovie id = {match.params.id}/>
           }}/> 
           <Route path ='/' render = {() => <Movies movies = {this.state.movies}/>}/>
