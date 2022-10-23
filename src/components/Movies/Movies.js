@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import Card from "../Card/Card";
-import "./Movies.css";
+import React, { Component } from 'react';
+import Card from '../Card/Card';
+import './Movies.css';
 
 class Movies extends Component {
   constructor() {
@@ -34,16 +34,20 @@ class Movies extends Component {
       );
     });
     return (
-      <div className="all-movies-container">
-        <input
-          type="search"
-          placeholder="search by title"
-          onChange={(e) =>
-            this.setState({ ...this.state, search: e.target.value })
-          }
-        />
-        {filteredMovies.length === 0 && movies.length !== 0 && <h4>Sorry no matching titles.</h4>}
-        <div className="movies-container">{movieCards}</div>
+      <div className='all-movies-container'>
+        <div className= 'search-container'>
+            <input
+            type='text'
+            aria-label='search'
+            className = 'search-bar'
+            placeholder='search by title'
+            onChange={(e) =>
+                this.setState({ ...this.state, search: e.target.value })
+            }
+            />
+        </div>    
+        {filteredMovies.length === 0 && movies.length !== 0 && <h4>Sorry no matching titles. Adjust your search.</h4>}
+        <div className='movies-container'>{movieCards}</div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 * {
     z-index: 2;
+    font-family: 'Rubik', sans-serif;
 }
 
 .single-movie-container {
@@ -52,11 +53,16 @@ h2 {
     color: white;
     margin: 1vh 2vw;
     font-size: 5vw;
+    font-style: italic;
 }
 
 p {
     color: white;
     margin: 2vh 5vw;
+}
+
+h4 {
+    color: white;
 }
 
 .close-symbol {

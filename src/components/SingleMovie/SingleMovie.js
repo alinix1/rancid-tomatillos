@@ -51,9 +51,9 @@ class SingleMovie extends Component {
 
   render() {
     if(!this.state.movie && !this.state.errorMessage) {
-      return <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>
+      return <div><img src = {loading} alt='loading' className='loading-image'/><h4>Loading...</h4></div>
     } else if (this.state.errorMessage) {
-      return <h2 className= 'error-message'>{this.state.errorMessage}</h2>
+      return <h4 className= 'error-message'>{this.state.errorMessage}</h4>
     }
     const {backdrop_path, title, overview, release_date, genres, runtime} = this.state.movie
     return (
@@ -71,7 +71,7 @@ class SingleMovie extends Component {
           <section className="movie-trailer">
             <Swiper modules={[Navigation, Pagination, Mousewheel, Keyboard]} slidesPerView = {1} pagination = {{clickable: true}} navigation= {true} keyboard={true} mousewheel={true} className="all-swiper-movies">
                 {this.createTrailerSlides()}
-                {this.state.videoErrorMessage && <h2 className= 'error-message'>{this.state.videoErrorMessage}</h2>}
+                {this.state.videoErrorMessage && <h4 className= 'error-message'>{this.state.videoErrorMessage}</h4>}
             </Swiper>
           </section>
           <section className="movie-details">

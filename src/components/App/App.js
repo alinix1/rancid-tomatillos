@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <main className = 'App'>
         <nav>
-          <h1 className ='main-title'>🍿 Rancid Tomatillos 🎬</h1>
+          <h1 className ='main-title'>🍿  Rancid Tomatillos  🎬</h1>
         </nav>
         {!this.state.errorMessage &&
         <Switch>
@@ -38,8 +38,8 @@ class App extends Component {
           }}/> 
           <Route path ='/' render = {() => <Movies movies = {this.state.movies}/>}/>
         </Switch>}
-        {this.state.errorMessage && <h2 className= 'error-message'>{this.state.errorMessage}</h2>}
-        {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>}
+        {this.state.errorMessage && <h4 className= 'error-message'>{this.state.errorMessage}</h4>}
+        {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image'/><h4>Loading...</h4></div>}
       </main>
     )
   }
