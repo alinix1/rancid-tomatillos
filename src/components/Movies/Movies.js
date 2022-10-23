@@ -2,8 +2,12 @@ import React from 'react';
 import Card from '../Card/Card';
 import './Movies.css'
 
-const Movies = ( {movies} ) => {
-    const sortedMovies = movies.sort((a, b) => {
+const Movies = ( {movies, searchQuery} ) => {
+    const parsedQuery = searchQuery.toLowerCase();
+    const filteredMovies = movies.filter(movie => {
+        return movie.title.toLowerCase().includes(parsedQuery)
+    });
+    const sortedMovies = filteredMovies.sort((a, b) => {
         return a.title.localeCompare(b.title)
     })
     const movieCards = sortedMovies.map(movie => {

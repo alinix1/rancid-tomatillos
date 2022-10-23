@@ -4,6 +4,7 @@ import loading from '../../assets/refresh.png';
 import { fetchAllData } from '../../apiCalls';
 import SingleMovie from '../SingleMovie/SingleMovie';
 import Movies from '../Movies/Movies';
+import Navbar from '../Navbar/Navbar'
 import './App.css';
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
     super();
     this.state = { 
       movies: [],
+      searchQuery: '',
       errorMessage: '',
     }
   }
@@ -25,18 +27,31 @@ class App extends Component {
     })
   }
 
+  handleSearchQuery = (queryText) => {
+    this.setState({
+      ...this.state,
+      searchQuery: queryText
+    })
+  }
+
   render() {
     return (
       <main className = 'App'>
         <nav>
           <h1 className ='main-title'>🍿 Rancid Tomatillos 🎬</h1>
+          <Switch>
+            <Route path = '/:id' render = {() => {}}/>
+            <Route path = '/' render = {() =>
+              <Navbar searchQuery={this.state.searchQuery} onSearch={this.handleSearchQuery}/>
+            }/>
+          </Switch>
         </nav>
         {!this.state.errorMessage &&
         <Switch>
           <Route path = '/:id' render = {({match}) => {
           return <SingleMovie id = {match.params.id}/>
-          }}/> 
-          <Route path ='/' render = {() => <Movies movies = {this.state.movies}/>}/>
+          }}/>
+          <Route path ='/' render = {() => <Movies movies = {this.state.movies} searchQuery = {this.state.searchQuery}/>}/>
         </Switch>}
         {this.state.errorMessage && <h2 className= 'error-message'>{this.state.errorMessage}</h2>}
         {!this.state.errorMessage && !this.state.movies.length && <div><img src = {loading} alt='loading' className='loading-image'/><h2>Loading...</h2></div>}
