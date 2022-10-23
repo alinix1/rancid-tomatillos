@@ -46,7 +46,7 @@ class Movies extends Component {
             }
             />
         </div>    
-        {filteredMovies.length === 0 && movies.length !== 0 && <h4>Sorry no matching titles. Adjust your search.</h4>}
+        {filteredMovies.length === 0 && movies.length !== 0 && <h4 className= "search-response">Sorry no matching titles. Adjust your search.</h4>}
         <div className='movies-container'>{movieCards}</div>
       </div>
     );
