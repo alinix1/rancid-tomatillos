@@ -45,6 +45,18 @@ describe("Main Movie Page", () => {
     cy.get("h1").contains("🍿 Rancid Tomatillos 🎬");
   });
 
+  it("should be able see a search bar and search by movie title", () => {
+    cy.get(".search-container").should("be.visible");
+    cy.get('input[type="text"]').type("After");
+    cy.contains(".card-title", "After We Collided");
+  });
+
+  it("should be able to search by movie title and if search returns no movies found display a message to user", () => {
+    cy.get(".search-container").should("be.visible");
+    cy.get('input[type="text"]').type("Rogue");
+    cy.contains(".search-response", "Sorry no matching titles. Adjust your search.");
+  });
+
   it("should be able to see movies, each with their poster, title and rating", () => {
     cy.get(".mini-poster").should("be.visible");
     cy.get(".movies-container").should("be.visible");
@@ -52,13 +64,9 @@ describe("Main Movie Page", () => {
     cy.contains(".card-rating", 5);
   });
 
-  it("should be able to click on a movie, and be shown additional details about that movie", () => {
+  it("should be able to click on a movie and be shown additional details about that movie", () => {
     cy.get(".movies-container").children().contains("2067").click();
     cy.url().should("include", "/528085");
     cy.contains("h2", "2067");
-  });
-
-  it("should not have a take me home X button", () => {
-    cy.get(".button").should("not.exist");
   });
 });
