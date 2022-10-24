@@ -12,6 +12,8 @@
 ## Introduction
 'Rancid Tomatillos' is a movie viewing application, not to be confused with Rotten Tomatoes, or Netflix, or IMDB. This is our first project using React.js! It's even better! On the main page of our application a user can view all movies with their movie poster, title, and tomatillo rating of excellence. The user can also search by movie title and the page will auto update with movies that match the criteria. If a user wants to view additional details about the movie, they can click on the movie and will be taken to a movie detail page with movie trailers to swipe through, overview, genres, release date, and runtime. To exit and go back home, just click the X button in the top corner. Our apologies, but some of the movie trailers in the API we used are missing so just click to find a new movie if so! 
 
+![rancid-tomatillos-reduced-size](https://user-images.githubusercontent.com/18154724/197441515-b683f5ec-c847-4932-b583-b231b3710732.gif)
+
 ## Links
 - [Project Spec](https://frontend.turing.edu/projects/module-3/rancid-tomatillos-v3.html)
 - [Project Board](https://github.com/users/alinix1/projects/4)
