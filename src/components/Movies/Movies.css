@@ -15,15 +15,6 @@ h4 {
     color: white;
 }
 
-.search-container {
-    display: flex;
-    flex-direction: row;
-    border-radius: 4px;
-    width: 15vw;
-    background-color: #ffca0eff;
-    margin-bottom: 2vh;
-}
-
 .search-bar {
     background: #ffca0eff;
     border-radius: 4px;
